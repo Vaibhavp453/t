@@ -44,7 +44,7 @@
   				border-top: none;
 			}
 		
-			.ccrButton
+			.button
 			{
 				
 				width:15%;
@@ -74,12 +74,20 @@
 	<body>
 		<div class="tab">
   			<button class="tablinks" onclick="openCity(event, 'Accounts')">Accounts</button>
+			<button class="tablinks" onclick="openCity(event, 'Reports')">Reports</button>
 		</div>
 	
 		<div id="Accounts" class="tabcontent">
   			<h3>Accounts</h3>
   			<form action="CreateCRPage.jsp">
-  				<p><button class=ccrButton>Create Customer Representative</button></p>
+  				<p><button class=button>Create Customer Representative</button></p>
+  			</form>
+		</div>
+		
+		<div id="Reports" class="tabcontent">
+  			<h3>Reports</h3>
+  			<form action="CreateCRPage.jsp"> <!Will change to report>
+  				<p><button class=button>Generate Sales Summary Report</button></p>
   			</form>
 		</div>
 	</body>
