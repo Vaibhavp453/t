@@ -116,6 +116,121 @@ public class UserHandler
 		return valid;
 	}
 	
+	public int createCustomerRep(String uname, String pword, 
+			String email, String phone)
+	{
+		System.out.println("UNAME="+uname);
+		System.out.println("PWORD="+pword);
+		System.out.println("e="+email);
+		System.out.println("ph="+phone);
+		
+		int valid=-1;
+		
+		DBSQL sql=new DBSQL("Accounts");
+		
+		String query="SELECT * FROM endUsers "
+				+"WHERE username='"+uname+"';";
+				
+		System.out.println("Q="+query);
+		
+		ArrayList<Object[]> data=sql.select(query);
+		
+		String tmpQuery="SELECT * FROM endUsers "
+				+"WHERE username='"+email+"';";
+		ArrayList<Object[]> tmpData=sql.select(query);
+		
+		if(data.size()!=0)
+		{
+			System.out.println(0);
+			System.out.println("Username taken!");
+			
+			valid=0; //Username taken error
+		}
+		else if(tmpData.size()!=0)
+		{
+			System.out.println(1);
+			System.out.println("Email taken!");
+			
+			valid=1; //Email taken error
+		}
+		else if(uname.contains("\"")//username
+				|| uname.contains("\'")
+				|| uname.contains(" ")
+				|| uname.length()>32
+				|| uname.length()<4)
+		{
+			System.out.println(2);
+			System.out.println("Username doesnt meet criteria");
+				
+			valid=2; //Username doesnt meet criteria
+		}
+		else if(pword.contains("\"")//Password
+				|| pword.contains("\'")
+				|| pword.contains(" ")
+				|| pword.length()>32
+				|| pword.length()<4)
+		{
+			System.out.println(3);
+			System.out.println("Password doesnt meet criteria");
+				
+			valid=3; //Password doesnt meet criteria
+		}
+		else if(email.contains("\"")//email
+				|| email.contains("\'")
+				|| email.contains(" ")
+				|| email.length()>64
+				|| email.length()<4)
+		{
+			System.out.println(4);
+			System.out.println("Email doesnt meet criteria");
+				
+			valid=4; //Email doesnt meet criteria
+		}
+		else if(phone.contains("\"")//Phone
+				|| phone.contains("\'")
+				|| phone.contains(" ")
+				|| phone.length()>32
+				|| phone.length()<4)
+		{
+			System.out.println(5);
+			System.out.println("Phone number doesnt meet criteria");
+				
+			valid=5; //Phone number doesnt meet criteria
+		}
+		else
+		{
+			//Insert into endUsers VALUES (1, 'Admin', 'root', 'Admin@gmail.com', '6090001111', true, '2001-01-01 00:00:00', true);
+			
+			String euTable="endUsers";
+			String crTable="customerReps";
+			int uid=getNewAccountID();
+			
+			String euQuery="INSERT INTO "+euTable+" VALUES ("
+					+uid+", \'"+uname+"\', \'"+pword+"\', \'"
+					+email+"\', \'"+phone+"\', \'"
+					+getLastAccessed()+"\', "+true+");";
+			
+			String crQuery="INSERT INTO "+crTable+" VALUES ("
+					+uid+", \'"+uname+"\', \'"+pword+"\', \'"
+					+email+"\', \'"+phone+"\', \'"
+					+getLastAccessed()+"\', "+true+");";
+			
+			System.out.println(euQuery);
+			
+			sql.updateTable(euQuery);
+			sql.updateTable(crQuery);
+			
+			System.out.println(6);
+			System.out.println("Account Created");
+					
+			//System.out.println(sql.getRowCount("endUsers"));
+			
+			valid=6; //Account created
+		}
+		
+		return valid;
+	}
+	
 	public boolean deleteAccount(String uname, String pword)
 	{
 		boolean isDeleted=false;

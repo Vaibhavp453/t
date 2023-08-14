@@ -1,4 +1,4 @@
-TODO: Remaining: 22
+TODO: Remaining: 20
 August 10:
 2) Create Databases. Maybe make a table of overall items, and then add each
 entry to a table specifically for that type of item. Make tables for the
@@ -38,10 +38,6 @@ information about them. We decide similarity measure
 
 15) Maybe add a feature in profile to allow anonymity by selecting first
 character of username, then underscore, then ID (A_1)
-
-16) 1 Administrative account can create accounts for customer reps
-
-17) Create customer rep database and allow for creation of customer reps
 
 18) Allow customer reps to modify information (including resetting 
 passwords, removing bids, and removing illegal auctions)

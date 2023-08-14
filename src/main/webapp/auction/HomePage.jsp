@@ -81,7 +81,7 @@
 							}
 						%>
 						
-						<li><a href="../login/LoginPage.jsp">Log Out</a></li>
+						<li><a href="../login/LoginPage.jsp" onclick=<% session.removeAttribute("LOGIN_USER"); %>>Log Out</a></li>
 					</ul>
 				</li>
 			</ul>
