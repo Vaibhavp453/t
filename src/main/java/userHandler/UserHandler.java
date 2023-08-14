@@ -187,6 +187,62 @@ public class UserHandler
 		return sql.getRowCount("endUsers")+1;
 	}
 	
+	public boolean isAdmin(String uname)
+	{
+		boolean isCR=false;
+		
+		DBSQL sql=new DBSQL("Accounts");
+		
+		String query="SELECT * FROM administrator "
+				+"WHERE username=\'"+uname+"\' AND isActive=true;";
+				
+		System.out.println(query);
+		
+		ArrayList<Object[]> data=sql.select(query);
+		
+		if(data.size()!=1)
+		{
+			System.out.println(1);
+			System.out.println("Incorrect information");
+			
+			isCR=false;
+		}
+		else
+		{
+			isCR=true;
+		}
+		
+		return isCR;
+	}
+	
+	public boolean isCustomerRep(String uname)
+	{
+		boolean isCR=false;
+		
+		DBSQL sql=new DBSQL("Accounts");
+		
+		String query="SELECT * FROM customerReps "
+				+"WHERE username=\'"+uname+"\' AND isActive=true;";
+				
+		System.out.println(query);
+		
+		ArrayList<Object[]> data=sql.select(query);
+		
+		if(data.size()!=1)
+		{
+			System.out.println(1);
+			System.out.println("Incorrect information");
+			
+			isCR=false;
+		}
+		else
+		{
+			isCR=true;
+		}
+		
+		return isCR;
+	}
+	
 	public boolean loginAccount(String uname, String pword)
 	{
 		//System.out.println(uname);

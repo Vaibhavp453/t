@@ -1,4 +1,4 @@
-TODO: Remaining: 23
+TODO: Remaining: 22
 August 10:
 2) Create Databases. Maybe make a table of overall items, and then add each
 entry to a table specifically for that type of item. Make tables for the
@@ -7,11 +7,6 @@ customer rep and admin too
 3) Create database for Items. Inside Items, have tables for different 
 Types of items. Inside Accounts, have tables for endUsers, customerReps,
 And Admin.
-
-4) Create profile pages so you can look someone's profile pick up. Will use 
-this to delete accounts for customer reps
-
-5) Customer reps can also delete accounts
 
 6) Allow creation of auctions. User can set characteristics of item, set 
 closing date and time, and set a hidden minimum price
@@ -69,3 +64,5 @@ rep forum public to search
 earnings per {item, item type, endUser}, best selling items, 
 best buyers (Maybe keep track of amount spent by each account, and top 10 or 
 so are shown in the report
+
+25) Create url endpoints

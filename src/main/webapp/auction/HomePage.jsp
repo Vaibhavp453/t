@@ -51,15 +51,36 @@
   			}
 		</style>
 		
+		<script type="text/javascript">
+			function passUser()
+			{
+				<% 
+					session.setAttribute("PROFILE_USER", session.getAttribute("LOGIN_USER"));
+				%>
+			}
+		</script>
+		
 	</head>
 	
 	<body>
 		<nav>
 			<ul>
 				<li>
-					<a href="#"><i class="fa fa-user"></i>User</a>				
+					<a href="#"><i class="fa fa-user"></i>User</a>	
+								
 					<ul class="dropdown">
-						<li><a href="ProfilePage.jsp">Profile</a></li>
+						<li><a href="ProfilePage.jsp" onclick="passUser()">Profile</a></li>
+						<%
+							String currentUser=(String)session.getAttribute("LOGIN_USER");
+							userHandler.UserHandler uh=new userHandler.UserHandler();
+							if(uh.isAdmin(currentUser))
+							{
+								%>
+								<li><a href="AdminPage.jsp">Admin</a></li>
+								<%
+							}
+						%>
+						
 						<li><a href="../login/LoginPage.jsp">Log Out</a></li>
 					</ul>
 				</li>

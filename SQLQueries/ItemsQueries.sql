@@ -1,13 +1,11 @@
-CREATE DATABASE Items;
+CREATE DATABASE IF NOT EXISTS Items;
 USE Items;
 
-CREATE TABLE Items
+Create TABLE IF NOT EXISTS Items
 (
-	name varchar(256),
-    itemType int 
-)
-
-INSERT INTO Items 
-values("CAR", 1);
+	id int,
+    category int,
+    PRIMARY KEY(id)
+);
 
 SELECT * FROM Items WHERE UPPER(name) LIKE "%RED%" OR UPPER(name) LIKE "%CAR%" OR UPPER(name) LIKE "%AND%" OR UPPER(name) LIKE "%TOOTHPASTE%" 

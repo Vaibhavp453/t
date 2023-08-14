@@ -34,6 +34,20 @@
 		</style>
 		
 		<script language="JavaScript" type="text/javascript">			
+			function changeLink()
+			{
+				<% 
+					String user=(String)session.getAttribute("PROFILE_USER");
+				%>
+				
+				var jsUser = "<%=user%>"
+				
+				console.log(jsUser);
+				
+				window.history.replaceState({}, "", jsUser);
+
+			}
+		
 			function login(showhide)
 			{
 				if(showhide == "show")
@@ -97,28 +111,17 @@
 		</style>
 	</head>
 	
-	<body>
+	<body onload="changeLink()">
 		<div class="homePageLogo">
 			<a onclick=goToHome()>Online Auction</a>
 		</div>
 	
 		<div>
-		
 			<i class="fa fa-user circle center"></i>
-		
-			<%
-				System.out.println("UN="+session.getAttribute("LOGIN_USER"));
-			%>
 		</div>
 		
 		<div class="displayUser">
-			<% out.println(session.getAttribute("LOGIN_USER")); %>
-		</div>
-		
-		<div>
-			<%
-				session.getAttribute("LOGIN_USER");
-			%>
+			<% out.println(session.getAttribute("PROFILE_USER")); %>
 		</div>
 		
 		<div id="popupbox"> 
@@ -135,13 +138,20 @@
 		
 		<%
 		String currentUser=(String)session.getAttribute("LOGIN_USER");
-		//if(currentUser)
+		String profileUser=(String)session.getAttribute("PROFILE_USER");
+		userHandler.UserHandler uh=new userHandler.UserHandler();
+		if(currentUser.equals(profileUser) 
+				|| uh.isCustomerRep(currentUser)
+				|| uh.isAdmin(currentUser)) //Add any profile settings here
+		{
+			%>
+				<form action="javascript:login('show')" method="post">
+					<div class="deleteAccountBtn">
+        				<button>Delete Account</button>
+        			</div>
+        		</form>
+			<%
+		}
 		%>
-		<form action="javascript:login('show')" method="post">
-		<div class="deleteAccountBtn">
-        	<button>Delete Account</button>
-        </div>
-        </form>
-        <%%>
 	</body>
 </html>

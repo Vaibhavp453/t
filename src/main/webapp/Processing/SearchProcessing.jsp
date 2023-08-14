@@ -74,7 +74,7 @@
 						for(int i=0; i<users.size(); i++)
 						{
 							%>
-								<a href="CreateAccountPage.jsp">
+								<a href="../auction/ProfilePage.jsp" onclick="<%session.setAttribute("PROFILE_USER", users.get(i));%>">
 							<%
 							out.println(users.get(i));
 							%>
