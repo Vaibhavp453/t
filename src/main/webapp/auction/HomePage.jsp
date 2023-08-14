@@ -135,7 +135,7 @@
 								<%
 							}
 						%>
-						
+						<li><a href="../login/ForumPage.jsp">Forum</a></li>
 						<li><a href="../login/LoginPage.jsp">Log Out</a></li>
 					</ul>
 				</li>
