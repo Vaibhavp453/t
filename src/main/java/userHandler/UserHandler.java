@@ -8,6 +8,10 @@ import databaseDriver.DBSQL;
 
 public class UserHandler
 {
+	String euTable="endUsers";
+	String crTable="custRep";
+	String aTable="administrator";
+	
 	public int createAccount(String uname, String pword, 
 			String email, String phone)
 	{
@@ -200,9 +204,6 @@ public class UserHandler
 		else
 		{
 			//Insert into endUsers VALUES (1, 'Admin', 'root', 'Admin@gmail.com', '6090001111', true, '2001-01-01 00:00:00', true);
-			
-			String euTable="endUsers";
-			String crTable="customerReps";
 			int uid=getNewAccountID();
 			
 			String euQuery="INSERT INTO "+euTable+" VALUES ("
@@ -336,7 +337,7 @@ public class UserHandler
 		
 		DBSQL sql=new DBSQL("Accounts");
 		
-		String query="SELECT * FROM customerReps "
+		String query="SELECT * FROM custRep "
 				+"WHERE username=\'"+uname+"\' AND isActive=true;";
 				
 		System.out.println(query);
@@ -408,10 +409,6 @@ public class UserHandler
 		{
 			System.out.println(4);
 			System.out.println("LOGIN");
-			
-			String euTable="endUsers";
-			String crTable="customerReps";
-			String aTable="administrator";
 			
 			String updateEUQuery="UPDATE "+euTable+" SET lastAccessed=\'"
 					+getLastAccessed()+"\' WHERE username=\'"+uname
