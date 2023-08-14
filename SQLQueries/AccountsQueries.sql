@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS customerReps
 );
 
 Select * from endUsers;
-endusers
+
 CREATE TABLE IF NOT EXISTS Administrator
 (
 	uid int,
@@ -45,6 +45,14 @@ CREATE TABLE IF NOT EXISTS Administrator
     isActive bool,
     PRIMARY KEY(uid)
 );
+
+select * from customerreps;
+
+INSERT INTO endUsers
+VALUES (3, 'cr', 'crpass', 'cr@gmail.com', '6092221111', '2001-01-01 00:00:00', true);
+
+INSERT INTO customerReps
+VALUES (3, 'cr', 'crpass', 'cr@gmail.com', '6092221111', '2001-01-01 00:00:00', true);
 
 INSERT INTO Administrator
 VALUES (1, 'Admin', 'root', 'Admin@gmail.com', '6090001111', '2001-01-01 00:00:00', true);
