@@ -15,7 +15,7 @@
 		<title>Profile</title>
 		
 		<style>
-			#popupbox
+			#DAPopupbox
 			{
 				margin: 0; 
 				margin-left: 40%; 
@@ -31,51 +31,30 @@
 				font-family: arial; 
 				visibility: hidden; 
 			}
-		</style>
-		
-		<script language="JavaScript" type="text/javascript">			
-			function changeLink()
-			{
-				<% 
-					String user=(String)session.getAttribute("PROFILE_USER");
-				%>
-				
-				var jsUser = "<%=user%>"
-				
-				console.log(jsUser);
-				
-				window.history.replaceState({}, "", jsUser);
-
-			}
-		
-			function login(showhide)
-			{
-				if(showhide == "show")
-				{
-    				document.getElementById('popupbox').style.visibility="visible";
-				}else if(showhide == "hide")
-				{
-    				document.getElementById('popupbox').style.visibility="hidden"; 
-    				location.replace("ProfilePage.jsp")
-				}
-			}
 			
-			function goToHome()
+			#RPPopupbox
 			{
-				location.replace("HomePage.jsp")
+				margin: 0; 
+				margin-left: 40%; 
+				margin-right: 40%;
+				margin-top: 50px; 
+				padding-top: 10px; 
+				width: 20%; 
+				height: 150px; 
+				position: absolute; 
+				background: #FBFBF0; 
+				border: solid #000000 2px; 
+				z-index: 9; 
+				font-family: arial; 
+				visibility: hidden; 
 			}
-		</script>
 		
-		<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
-		
-		
-		<style>
 			.fa-user
 			{
 				background: #D3D3D3;
 				color: #FFFFFF;
   				padding: 0.25em 0.25em;
-  				postition: relative;
+  				position: relative;
 			}
 			
 			.circle
@@ -92,10 +71,10 @@
   				text-align: center;
 			}
 			
-			.deleteAccountBtn 
+			.button 
   			{
-  				float: left;
-  				text-align: left;
+  				float: right;
+  				text-align: right;
      			width: 100%;
   			}
   			
@@ -107,11 +86,10 @@
   				cursor: pointer;
   				border: 2px solid black;
   			}
-  			
   			.displayUser
   			{
   				font-weight: bold;
-  				font-size:30px;
+  				font-size:35px;
   				text-align: center;
   			}
   			
@@ -137,9 +115,67 @@
   				font-size: 20px;
   				padding: 20px;
   			}
-  		
-
+  			
 		</style>
+		
+		<script language="JavaScript" type="text/javascript">			
+			function changeLink()
+			{
+				<% 
+					String user=(String)session.getAttribute("PROFILE_USER");
+				%>
+				
+				var jsUser = "<%=user%>"
+				
+				console.log(jsUser);
+				
+				window.history.replaceState({}, "", jsUser);
+
+			}
+			
+			function goToHome()
+			{
+				location.replace("HomePage.jsp")
+			}
+			
+			function resetPassword()
+			{
+				<%
+					//userHandler.UserHandler uh=new userHandler.UserHandler();
+				
+					System.out.println("H");
+				%>
+				
+				alert("Password Changed!");
+			}
+		
+			function resetPassword(showhide)
+			{
+				if(showhide == "show")
+				{
+    				document.getElementById('RPPopupbox').style.visibility="visible";
+				}else if(showhide == "hide")
+				{
+    				document.getElementById('RPPopupbox').style.visibility="hidden"; 
+    				location.replace("ProfilePage.jsp")
+				}
+			}
+			
+			function verifyCredentials(showhide)
+			{
+				if(showhide == "show")
+				{
+    				document.getElementById('DAPopupbox').style.visibility="visible";
+				}else if(showhide == "hide")
+				{
+    				document.getElementById('DAPopupbox').style.visibility="hidden"; 
+    				location.replace("ProfilePage.jsp")
+				}
+			}
+		</script>
+		
+		<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+		
 	</head>
 	
 	<body onload="changeLink()">
@@ -148,18 +184,28 @@
 		</div>
 	
 		<div>
-		<center><i class="fa fa-user circle center"></i></center>
+			<center><i class="fa fa-user circle center"></i></center>
 		</div>
 		
 		<div class="displayUser">
 			<% out.println(session.getAttribute("PROFILE_USER")); %>
 		</div>
 		
+		<div id="RPPopupbox"> 
+			<form name="login" action="../Processing/RIProcessing.jsp" method="post">
+				<center>Username:</center>
+				<center><input name="RPuname" size="14" /></center>
+				<center>New Password:</center>
+				<center><input name="RPpword" type="password" size="14" /></center>
+				<center>Confirm Password:</center>
+				<center><input name="RPcpword" type="password" size="14" /></center>
+				<center><input type="submit" name="submit" value="Reset Password" /></center>
+			</form>
+			<br/>
+			<center><a href="javascript:resetPassword('hide');">close</a></center> 
+		</div> 
 		
-
-		
-		
-		<div id="popupbox"> 
+		<div id="DAPopupbox"> 
 			<form name="login" action="../Processing/DAProcessing.jsp" method="post">
 				<center>Username:</center>
 				<center><input name="DAuname" size="14" /></center>
@@ -168,7 +214,7 @@
 				<center><input type="submit" name="submit" value="Verify" /></center>
 			</form>
 			<br/>
-			<center><a href="javascript:login('hide');">close</a></center> 
+			<center><a href="javascript:verifyCredentials('hide');">close</a></center> 
 		</div> 
 		
 		<%
@@ -180,13 +226,25 @@
 				|| uh.isAdmin(currentUser)) //Add any profile settings here
 		{
 			%>
-				<ul class="nav">
+				
+		
+        		
+        		<ul class="nav">
 					<li>
-						<form action="javascript:login('show')" method="post">
-							<div class="deleteAccountBtn">
+						<form action="javascript:verifyCredentials('show')" method="post">
+							<div class="button">
         						<button>Delete Account</button>
         					</div>
         				</form>
+        			</li>
+        			
+        			<li>
+        				<form action="javascript:resetPassword('show')" method="post">
+							<div class="button">
+        						<button>Reset Password</button>
+        					</div>
+        				</form>
+        				
         			</li>
         		
         			<li>
@@ -195,7 +253,6 @@
 						</div>
 					</li>
 				</ul>
-				
 			<%
 		}
 		%>
