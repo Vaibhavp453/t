@@ -75,6 +75,7 @@
 				background: #D3D3D3;
 				color: #FFFFFF;
   				padding: 0.25em 0.25em;
+  				postition: relative;
 			}
 			
 			.circle
@@ -93,21 +94,51 @@
 			
 			.deleteAccountBtn 
   			{
-  				float: right;
-  				text-align: right;
+  				float: left;
+  				text-align: left;
      			width: 100%;
   			}
   			
   			.homePageLogo
   			{
+  				background-color: #0080fe;
   				text-align: center;
   				font-size:50px;
+  				cursor: pointer;
+  				border: 2px solid black;
   			}
+  			
   			.displayUser
   			{
   				font-weight: bold;
-  				font-size:35px;
+  				font-size:30px;
+  				text-align: center;
   			}
+  			
+  			.adminPage
+  			{
+				float: left;
+  				text-align: left;
+     			width: 100%;  				
+  			}
+  			
+  			.nav {
+  				list-style-type: none;
+  				text-align: center; 
+  				background-color: #0080fe;
+  				padding: 0;
+  				margin: 0;
+  				border: 1px solid black;
+  			}
+  			
+  			.nav li
+  			{
+  				display: inline-block;
+  				font-size: 20px;
+  				padding: 20px;
+  			}
+  		
+
 		</style>
 	</head>
 	
@@ -117,12 +148,16 @@
 		</div>
 	
 		<div>
-			<i class="fa fa-user circle center"></i>
+		<center><i class="fa fa-user circle center"></i></center>
 		</div>
 		
 		<div class="displayUser">
 			<% out.println(session.getAttribute("PROFILE_USER")); %>
 		</div>
+		
+		
+
+		
 		
 		<div id="popupbox"> 
 			<form name="login" action="../Processing/DAProcessing.jsp" method="post">
@@ -145,11 +180,22 @@
 				|| uh.isAdmin(currentUser)) //Add any profile settings here
 		{
 			%>
-				<form action="javascript:login('show')" method="post">
-					<div class="deleteAccountBtn">
-        				<button>Delete Account</button>
-        			</div>
-        		</form>
+				<ul class="nav">
+					<li>
+						<form action="javascript:login('show')" method="post">
+							<div class="deleteAccountBtn">
+        						<button>Delete Account</button>
+        					</div>
+        				</form>
+        			</li>
+        		
+        			<li>
+        				<div class="adminPage">
+							<button><a href="AdminPage.jsp">Admin Page</a></button>
+						</div>
+					</li>
+				</ul>
+				
 			<%
 		}
 		%>
